@@ -62,4 +62,19 @@ public class Warp : MonoBehaviour, IGvrGazeResponder
 			Particle.SetActive(!samePos);
 		}
 	}
+
+	/// <summary>
+	/// Update後にコールされるメソッド
+	/// </summary>
+	void LateUpdate()
+	{
+		// 状態の更新(backボタンの押下状態を更新する)
+		GvrViewer.Instance.UpdateState();
+		// backボタンが押されていた場合
+		if (GvrViewer.Instance.BackButtonPressed)
+		{
+			// アプリケーションを終了する
+			Application.Quit();
+		}
+	}
 }
