@@ -4,6 +4,11 @@ using System;
 
 public class Warp : MonoBehaviour, IGvrGazeResponder
 {
+	[SerializeField]
+	private GameObject GvrMain;
+	[SerializeField]
+	private GameObject WarpZone;
+
 	/// <summary>
 	/// 視線が当たった時の処理
 	/// </summary>
@@ -26,6 +31,13 @@ public class Warp : MonoBehaviour, IGvrGazeResponder
 	public void OnGazeTrigger()
 	{
 		Debug.Log("OnGazeTrigger");
+
+		// ワープゾーンの位置
+		var warpPos = WarpZone.transform.position;
+		// 高さの調整
+		warpPos.y += 3;
+		// ワープゾーンの位置に移動する
+		GvrMain.transform.position = warpPos;
 	}
 
 	// Use this for initialization
