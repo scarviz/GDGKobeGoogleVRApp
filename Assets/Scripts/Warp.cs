@@ -8,6 +8,8 @@ public class Warp : MonoBehaviour, IGvrGazeResponder
 	private GameObject GvrMain;
 	[SerializeField]
 	private GameObject WarpZone;
+	[SerializeField]
+	private GameObject Particle;
 
 	/// <summary>
 	/// 視線が当たった時の処理
@@ -38,15 +40,26 @@ public class Warp : MonoBehaviour, IGvrGazeResponder
 		warpPos.y += 3;
 		// ワープゾーンの位置に移動する
 		GvrMain.transform.position = warpPos;
+
+		// パーティクルを無効にする
+		Particle.SetActive(false);
 	}
 
 	// Use this for initialization
 	void Start () {
-	
+		Particle.SetActive(false);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		// パーティクルが無効になっている場合
+		if (!Particle.activeSelf)
+		{
+			// x,z座標が一致するかどうか
+			var samePos = GvrMain.transform.position.x == WarpZone.transform.position.x
+				&& GvrMain.transform.position.z == WarpZone.transform.position.z;
+			// 同じ位置でない場合、有効にする
+			Particle.SetActive(!samePos);
+		}
 	}
 }
