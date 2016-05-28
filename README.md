@@ -8,3 +8,6 @@ https://www.assetstore.unity3d.com/jp/#!/content/58821
 
 Particle Ribbon  
 https://www.assetstore.unity3d.com/jp/#!/content/42866
+
+64 Flat Game Icons  
+https://www.assetstore.unity3d.com/jp/#!/content/36440
