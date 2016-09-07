@@ -29,7 +29,6 @@ namespace Gvr.Internal {
 
     // Event IDs sent up from native layer.  Bit flags.
     // Keep in sync with the corresponding declaration in unity.h.
-    private const int kTriggered = 1 << 0;
     private const int kTilted = 1 << 1;
     private const int kProfileChanged = 1 << 2;
     private const int kVRBackButtonPressed = 1 << 3;
@@ -51,14 +50,6 @@ namespace Gvr.Internal {
 
     public override void SetNeckModelScale(float scale) {
       SetNeckModelFactor(scale);
-    }
-
-    public override void SetAutoDriftCorrectionEnabled(bool enabled) {
-      EnableAutoDriftCorrection(enabled);
-    }
-
-    public override void SetElectronicDisplayStabilizationEnabled(bool enabled) {
-      EnableElectronicDisplayStabilization(enabled);
     }
 
     public override bool SetDefaultDeviceProfile(System.Uri uri) {
@@ -180,7 +171,6 @@ namespace Gvr.Internal {
 
     protected virtual void ProcessEvents() {
       int flags = GetEventFlags();
-      triggered = ((flags & kTriggered) != 0);
       tilted = ((flags & kTilted) != 0);
       backButtonPressed = ((flags & kVRBackButtonPressed) != 0);
       if ((flags & kProfileChanged) != 0) {
@@ -208,12 +198,6 @@ namespace Gvr.Internal {
 
     [DllImport(dllName)]
     private static extern void EnableDistortionCorrection(bool enable);
-
-    [DllImport(dllName)]
-    private static extern void EnableAutoDriftCorrection(bool enable);
-
-    [DllImport(dllName)]
-    private static extern void EnableElectronicDisplayStabilization(bool enable);
 
     [DllImport(dllName)]
     private static extern void SetNeckModelFactor(float factor);
